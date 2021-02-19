@@ -118,13 +118,16 @@ def gradient_descent(X, y, alpha, it):
         
         # формула 1
         j_theta[i] = J_theta(h_x, y)
-        
+        if(i < 100):
+            print(theta)
         # рассчитываем новую theta
         theta = Theta_j(theta, alpha, h_x, y, X)
     return j_theta, theta
 
 X = np.c_[np.ones((x.shape[0],1)), x]
-J_theta = gradient_descent(X, y, 0.02, 500)[0]
+res = gradient_descent(X, y, 0.02, 500)
+J_theta = res[0]
+THETA = res[1]
 
 plt.plot(J_theta)
 plt.title('Снижение ошибки при градиентном спуске')
@@ -136,8 +139,37 @@ plt.show()
 #TODO 5
 print('\n')
 
-x0_1 = float(input('Введите x1[0]: '))
+#x0_1 = float(input('Введите x1[0]: '))
 
-x1_1 = float(input('Введите x2[0]: '))
+#x1_1 = float(input('Введите x2[0]: '))
 
-data1 = np.matrix([[x0_1, 0],[x1_1, 0]])
+#data1 = np.matrix([[x0_1, 0],[x1_1, 0]])
+
+# эксперемент!
+
+def h_theta__X(theta, x):
+    m = x.shape[0]
+    x_ones = np.c_[np.ones((m, 1)), x]
+    h = theta * x_ones.T
+    return h
+
+D = np.matrix([5]) #17.929
+print(D)
+print(h_theta__X(THETA, D))
+
+#TODO 6
+
+#берем столбцы из матрицы
+a = data[:, 0]
+b = data[:, 1]
+
+x1 = np.arange(min(a), max(a))
+print(THETA[1]*x1 + THETA[0])
+plt.plot(x1, THETA[1]*x1 + THETA[0], 'g--')
+plt.plot(a, b,'b.')
+
+#TODO7
+
+
+
+
