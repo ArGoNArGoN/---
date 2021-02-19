@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn import preprocessing
 
 #TODO 1
 
@@ -51,7 +52,7 @@ def compute_cost(x_ones, y, theta):
 m = x.shape[0]
 
 #добавляем единичный столбец к x
-x_ones = np.c_[np.ones((m,1)), x]
+x_ones = np.c_[np.ones((m, 1)), x]
 
 #'k' theta представляют собой вектор таблиц из 2 элементов
 theta = np.matrix([[1],[2]])
@@ -169,6 +170,20 @@ plt.plot(x1, THETA[1]*x1 + THETA[0], 'g--')
 plt.plot(a, b,'b.')
 
 #TODO7
+
+fName = "ex1data2.txt"
+data = np.matrix(np.loadtxt(fName, delimiter=','))
+
+#берем столбцы из матрицы
+X = data[:, 0]
+y = data[:, 1]
+
+X_norm = preprocessing.normalize(X)
+print(X_norm)
+
+
+
+
 
 
 
