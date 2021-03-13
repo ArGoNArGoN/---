@@ -1,35 +1,26 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from statistics import mean
 
-def normalize(x):
-    x1 = np.zeros(x.shape[0]);
-    min_x = min(x); 
-    max_x = max(x);
-    for i in range(0, x.shape[0]):
-        x1[i] = (x[i] - min_x) / (max_x - min_x)
-    return x1
+data = np.matrix(np.loadtxt('ex1data2.txt', delimiter = ','))
+x = data [:, :2]
+y = data[:, 2]
 
-fName = "ex1data2.txt"
-data = np.matrix(np.loadtxt(fName, delimiter=','))
-
-#берем столбцы из матрицы
-X = data[:, 0]
-y = data[:, 1]
-
-X_norm = normalize(X);
-y_norm = normalize(X);
-
-X_std = np.std(X)
-y_std = np.std(y)
-
-Std = np.std(data)
-
-print('X: ', X_std)
-print('y: ', y_std)
-
-X_1 = X_norm / X_std
-y_1 = y_norm / y_std
-print(X_1)
-print(y_1)
+# x содержит 2 столбца лощадь в футах
+# y содержит 1 столбец (последний) цена дома
+# 3 стобец зависит от первых 2, то есть x - данное, а y зависимое 
 
 
+# найдем среднее значение среднеквадр. отклонение 
+# (если я правильно понял - квадратное)
+
+xmean = np.nanmean(x)
+xstd = np.nanstd(x)
+ystd = np.nanstd(y) #среднеквадр. отклонение
+ymean = np.nanmean(y) # среднее арифм.
+
+# по формуле найдем x нормальное
+xnorm = (x - xmean)/xstd
+
+print(xnorm)
+## 9.64150080e-01
